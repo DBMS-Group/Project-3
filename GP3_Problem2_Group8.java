@@ -44,6 +44,10 @@ public class GP3_Problem2_Group8
 		}
 	}
 
+	/**
+	* Adds a new faculty member to the Faculty table with an average salary based
+	* on the average salary of all faculty members.
+	**/
 	private static void OptionOne(Scanner scan)
 	{
 		System.out.printf("Option 1 chosen.\n");
@@ -59,15 +63,21 @@ public class GP3_Problem2_Group8
 		else if(avgSalary < 30000)
 		{
 			// Set the salary equal to the faculty average salary.
+
 		}
 		else
 		{
 			// Set the salary equal to 80% of the average salary.
+
 		}
 
 		System.out.println();
 	}
 
+	/**
+	* Adds a new faculty member to the Faculty table with an average salary based
+	* on the average salary of all faculty members outside of a specified department.
+	**/
 	private static void OptionTwo(Scanner scan)
 	{
 		// The salary is computed to be equal to the average salary of every faculty
@@ -87,11 +97,51 @@ public class GP3_Problem2_Group8
 		System.out.println();
 	}
 
+	/**
+	* Prints the Faculty table.
+	**/
 	private static void OptionThree()
 	{
 		System.out.printf("Option 3 chosen.\n");
 
 		// SQL statement to retrieve all the faculty members from the Faculty table.
 		System.out.println();
+	}
+
+	/**
+	* A class representing a faculty member.
+	**/
+	private class Faculty
+	{
+		/**
+		* The ID of the faculty member.
+		**/
+		public String id;
+
+		/**
+		* The name of the faculty member.
+		**/
+		public String name;
+
+		/**
+		* The department ID of the faculty member.
+		**/
+		public String deptId;
+
+		/**
+		* The salary of the faculty member.
+		**/
+		public String salary;
+
+		/**
+		* Faculty Constructor.
+		**/
+		public Faculty(String id, String name, String deptId, String salary)
+		{
+			this.id = id;
+			this.name = name;
+			this.deptId = deptId;
+			this.salary = salary;
+		}
 	}
 }
