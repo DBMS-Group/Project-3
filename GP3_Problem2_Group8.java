@@ -52,6 +52,11 @@ public class GP3_Problem2_Group8
 	{
 		System.out.printf("Option 1 chosen.\n");
 
+		// Gets a new faculty member.
+		Faculty newMember = GetNewFacultyMember(scan);
+
+		System.out.println(newMember.id);
+
 		// SQL statement get the average salary of all Faculty.
 		float avgSalary = 0f;
 
@@ -88,6 +93,11 @@ public class GP3_Problem2_Group8
 		System.out.printf("Please enter the department to exclude: ");
 		String department = scan.nextLine();
 
+		// Gets a new faculty member.
+		Faculty newMember = GetNewFacultyMember(scan);
+
+		System.out.println(newMember.id);
+
 		// SQL statment to get the average salary of the faculty members not in
 		// the given department.
 		float avgSalary = 0f;
@@ -109,9 +119,33 @@ public class GP3_Problem2_Group8
 	}
 
 	/**
+	* Gets a new faculty member.
+	**/
+	private static Faculty GetNewFacultyMember(Scanner scan)
+	{
+		Faculty tempFaculty = new Faculty();
+
+		System.out.printf("Please enter the following:\n");
+
+		// Get the faculty member's ID.
+		System.out.printf("\tEnter the ID: ");
+		tempFaculty.id = scan.nextLine();
+
+		// Get the faculty member's name.
+		System.out.printf("\tEnter the name: ");
+		tempFaculty.name = scan.nextLine();
+
+		// Get the faculty member's department ID.
+		System.out.printf("\tEnter the department: ");
+		tempFaculty.deptId = scan.nextLine();
+
+		return tempFaculty;
+	}
+
+	/**
 	* A class representing a faculty member.
 	**/
-	private class Faculty
+	private static class Faculty
 	{
 		/**
 		* The ID of the faculty member.
@@ -132,16 +166,5 @@ public class GP3_Problem2_Group8
 		* The salary of the faculty member.
 		**/
 		public String salary;
-
-		/**
-		* Faculty Constructor.
-		**/
-		public Faculty(String id, String name, String deptId, String salary)
-		{
-			this.id = id;
-			this.name = name;
-			this.deptId = deptId;
-			this.salary = salary;
-		}
 	}
 }
