@@ -27,13 +27,13 @@ public class GP3_Problem2_Group8
 			switch(input)
 			{
 				case 1:
-					OptionOne(scan);
+					AddNewOne(scan);
 					break;
 				case 2:
-					OptionTwo(scan);
+					AddNewTwo(scan);
 					break;
 				case 3:
-					OptionThree();
+					PrintTable();
 					break;
 				case 4:
 					break;
@@ -48,7 +48,7 @@ public class GP3_Problem2_Group8
 	* Adds a new faculty member to the Faculty table with an average salary based
 	* on the average salary of all faculty members.
 	**/
-	private static void OptionOne(Scanner scan)
+	private static void AddNewOne(Scanner scan)
 	{
 		System.out.printf("Option 1 chosen.\n");
 
@@ -78,7 +78,7 @@ public class GP3_Problem2_Group8
 	* Adds a new faculty member to the Faculty table with an average salary based
 	* on the average salary of all faculty members outside of a specified department.
 	**/
-	private static void OptionTwo(Scanner scan)
+	private static void AddNewTwo(Scanner scan)
 	{
 		// The salary is computed to be equal to the average salary of every faculty
 		// member in the university except the faculty members working for a
@@ -100,7 +100,7 @@ public class GP3_Problem2_Group8
 	/**
 	* Prints the Faculty table.
 	**/
-	private static void OptionThree()
+	private static void PrintTable()
 	{
 		System.out.printf("Option 3 chosen.\n");
 
