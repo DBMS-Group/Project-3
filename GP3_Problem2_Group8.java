@@ -81,30 +81,22 @@ public class GP3_Problem2_Group8
 	**/
 	private static void AddNewOne(Scanner scan) throws SQLException
 	{
-		System.out.printf("Option 1 chosen.\n");
-
 		// Gets a new faculty member.
 		Faculty newMember = GetNewFacultyMember(scan);
 
-		// The results of the SQL statement.
-		float avgSalary = 0.0f;
+		// SQL statement for submitting the new faculty member.
+		Statement stmt = conn.createStatement();
+		String sql = String.format("EXEC FACULTY_INSERT_OPTION_ONE('%s', %s, %s);",
+			newMember.name,
+			newMember.id,
+			newMember.deptId
+		);
 
-		if(avgSalary > 50000)
-		{
-			// Set the salary equal to 90% of the faculty average salary.
-			newMember.salary = String.valueOf(avgSalary * 0.9);
-		}
-		else if(avgSalary < 30000)
-		{
-			// Set the salary equal to the faculty average salary.
-			newMember.salary = String.valueOf(avgSalary);
-		}
-		else
-		{
-			// Set the salary equal to 80% of the average salary.
-			newMember.salary = String.valueOf(avgSalary * 0.8);
-		}
+		// Executing the SQL statement.
+		stmt.executeQuery(sql);
 
+		// Closing the SQL statement.
+		stmt.close();
 		System.out.println();
 	}
 
@@ -112,25 +104,29 @@ public class GP3_Problem2_Group8
 	* Adds a new faculty member to the Faculty table with an average salary based
 	* on the average salary of all faculty members outside of a specified department.
 	**/
-	private static void AddNewTwo(Scanner scan)
+	private static void AddNewTwo(Scanner scan) throws SQLException
 	{
-		// The salary is computed to be equal to the average salary of every faculty
-		// member in the university except the faculty members working for a
-		// particular department.
-		System.out.printf("Option 2 chosen.\n");
-
+		// Prompting the user for the department to exlude from the query.
 		System.out.printf("Please enter the department to exclude: ");
 		String department = scan.nextLine();
 
 		// Gets a new faculty member.
 		Faculty newMember = GetNewFacultyMember(scan);
 
-		// SQL statment to get the average salary of the faculty members not in
-		// the given department.
-		float avgSalary = 0f;
+		// SQL statment to submit the new faculty member.
+		Statement stmt = conn.createStatement();
+		String sql = String.format("EXEC FACULTY_INSERT_OPTION_TWO(%s, '%s', %s, %s);",
+			newMember.id,
+			newMember.name,
+			newMember.deptId,
+			department
+		);
 
-		// SQL statement to add the faculty member with the average salary to 
-		// the Faculty table.
+		// Executing the SQL statement.
+		stmt.executeQuery(sql);
+
+		// Closing the SQL statement.
+		stmt.close();
 		System.out.println();
 	}
 
