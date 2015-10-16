@@ -22,43 +22,76 @@ public class GP3_Problem2_Group8
 
 			// Get the user's input.
 			input = scan.nextInt();
+			scan.nextLine();
 
 			switch(input)
 			{
 				case 1:
-					System.out.printf("Option 1 chosen.");
+					OptionOne(scan);
 					break;
 				case 2:
-					System.out.printf("Option 2 chosen.");
+					OptionTwo(scan);
 					break;
 				case 3:
-					System.out.printf("Option 3 chosen.");
+					OptionThree();
+					break;
+				case 4:
 					break;
 				default:
+					System.out.printf("Please enter a valid option!\n");
 					break;
 			}
 		}
 	}
 
-	private static void OptionOne()
+	private static void OptionOne(Scanner scan)
 	{
-		// If the average faculty salary is greater than $50,000 then the salary
-		// of the new faculty member will be equal to 90% of the average faculty
-		// salary; if the average faculty salary is less than $30,000, then the
-		// salary of the new faculty member will be equal to the average faculty
-		// salary; otherwise, the salary of the new faculty member will be equal
-		// to 80% of the average faculty salary
+		System.out.printf("Option 1 chosen.\n");
+
+		// SQL statement get the average salary of all Faculty.
+		float avgSalary = 0f;
+
+		if(avgSalary > 50000)
+		{
+			// Set the salary equal to 90% of the faculty average salary.
+
+		}
+		else if(avgSalary < 30000)
+		{
+			// Set the salary equal to the faculty average salary.
+		}
+		else
+		{
+			// Set the salary equal to 80% of the average salary.
+		}
+
+		System.out.println();
 	}
 
-	private static void OptionTwo()
+	private static void OptionTwo(Scanner scan)
 	{
 		// The salary is computed to be equal to the average salary of every faculty
 		// member in the university except the faculty members working for a
 		// particular department.
+		System.out.printf("Option 2 chosen.\n");
+
+		System.out.printf("Please enter the department to exclude: ");
+		String department = scan.nextLine();
+
+		// SQL statment to get the average salary of the faculty members not in
+		// the given department.
+		float avgSalary = 0f;
+
+		// SQL statement to add the faculty member with the average salary to 
+		// the Faculty table.
+		System.out.println();
 	}
 
 	private static void OptionThree()
 	{
-		// Print the Faculty table.
+		System.out.printf("Option 3 chosen.\n");
+
+		// SQL statement to retrieve all the faculty members from the Faculty table.
+		System.out.println();
 	}
 }
