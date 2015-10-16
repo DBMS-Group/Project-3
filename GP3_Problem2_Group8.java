@@ -8,10 +8,7 @@ public class GP3_Problem2_Group8
 	static final String JDBC_DRIVER = "oracle.jdbc.OracleDriver";  
 	static final String DB_URL = "jdbc:oracle:thin:@//oracle.cs.ou.edu:1521/pdborcl.cs.ou.edu";
 
-	//  Database credentials
-	static final String USER = "garr4639";
-	static final String PASS = "NLth4Pl2";
-
+	// The database connection.
 	static Connection conn;
 
 	public static void main(String[] args) throws SQLException, ClassNotFoundException
@@ -20,11 +17,25 @@ public class GP3_Problem2_Group8
 		Scanner scan = new Scanner(System.in);
 		int input = 0;
 
+		// The username and password for the database.
+		String user = "";
+		String password = "";
+
+		// Getting the username.
+		System.out.printf("Please enter the username for the database: ");
+		user = scan.nextLine();
+
+		// Getting the password.
+		System.out.printf("Please enter the password for the database: ");
+		password = scan.nextLine();
+
+		System.out.printf("\nConnecting...\n\n");
+
 		// Registering the JDBC driver.
 		Class.forName(JDBC_DRIVER);
 
 		// Creating the database connection.
-		conn = DriverManager.getConnection(DB_URL, USER, PASS);
+		conn = DriverManager.getConnection(DB_URL, user, password);
 
 		// Welcoming the user.
 		System.out.printf("Welcome to project three.\n");
@@ -149,7 +160,11 @@ public class GP3_Problem2_Group8
 			facultyMembers.add(newMember);
 		}
 
+		// Printing the faculty members.
 		PrintTheFaculty(facultyMembers);
+
+		// Closing the statement.
+		stmt.close();
 	}
 
 	/**
