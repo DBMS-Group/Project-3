@@ -1,12 +1,30 @@
 import java.util.Scanner;
+import java.sql.*;
+import java.util.ArrayList;
 
 public class GP3_Problem2_Group8
 {
-	public static void main(String[] args)
+	// JDBC driver name and database URL
+	static final String JDBC_DRIVER = "oracle.jdbc.OracleDriver";  
+	static final String DB_URL = "jdbc:oracle:thin:@//oracle.cs.ou.edu:1521/pdborcl.cs.ou.edu";
+
+	//  Database credentials
+	static final String USER = "garr4639";
+	static final String PASS = "NLth4Pl2";
+
+	static Connection conn;
+
+	public static void main(String[] args) throws SQLException, ClassNotFoundException
 	{
 		// Declaring the various variables.
 		Scanner scan = new Scanner(System.in);
 		int input = 0;
+
+		// Registering the JDBC driver.
+		Class.forName(JDBC_DRIVER);
+
+		// Creating the database connection.
+		conn = DriverManager.getConnection(DB_URL, USER, PASS);
 
 		// Welcoming the user.
 		System.out.printf("Welcome to project three.\n");
@@ -42,38 +60,38 @@ public class GP3_Problem2_Group8
 					break;
 			}
 		}
+
+		conn.close();
 	}
 
 	/**
 	* Adds a new faculty member to the Faculty table with an average salary based
 	* on the average salary of all faculty members.
 	**/
-	private static void AddNewOne(Scanner scan)
+	private static void AddNewOne(Scanner scan) throws SQLException
 	{
 		System.out.printf("Option 1 chosen.\n");
 
 		// Gets a new faculty member.
 		Faculty newMember = GetNewFacultyMember(scan);
 
-		System.out.println(newMember.id);
-
-		// SQL statement get the average salary of all Faculty.
-		float avgSalary = 0f;
+		// The results of the SQL statement.
+		float avgSalary = 0.0f;
 
 		if(avgSalary > 50000)
 		{
 			// Set the salary equal to 90% of the faculty average salary.
-
+			newMember.salary = String.valueOf(avgSalary * 0.9);
 		}
 		else if(avgSalary < 30000)
 		{
 			// Set the salary equal to the faculty average salary.
-
+			newMember.salary = String.valueOf(avgSalary);
 		}
 		else
 		{
 			// Set the salary equal to 80% of the average salary.
-
+			newMember.salary = String.valueOf(avgSalary * 0.8);
 		}
 
 		System.out.println();
@@ -96,8 +114,6 @@ public class GP3_Problem2_Group8
 		// Gets a new faculty member.
 		Faculty newMember = GetNewFacultyMember(scan);
 
-		System.out.println(newMember.id);
-
 		// SQL statment to get the average salary of the faculty members not in
 		// the given department.
 		float avgSalary = 0f;
@@ -110,12 +126,51 @@ public class GP3_Problem2_Group8
 	/**
 	* Prints the Faculty table.
 	**/
-	private static void PrintTable()
+	private static void PrintTable() throws SQLException
 	{
-		System.out.printf("Option 3 chosen.\n");
+		// The list of faculty members.
+		ArrayList<Faculty> facultyMembers = new ArrayList<Faculty>();
 
-		// SQL statement to retrieve all the faculty members from the Faculty table.
-		System.out.println();
+		// SQL statement for getting all the faculty members.
+		Statement stmt = conn.createStatement();
+		String sql = "SELECT * FROM Faculty";
+		ResultSet result = stmt.executeQuery(sql);
+
+		// Iterate over the results and initialize the faculty member objects.
+		while(result.next())
+		{
+			Faculty newMember = new Faculty();
+			newMember.id = String.valueOf(result.getInt("fid"));
+			newMember.name = result.getString("fname");
+			newMember.deptId = String.valueOf(result.getInt("deptId"));
+			newMember.salary = String.valueOf(result.getFloat("salary"));
+
+			// Add the faculty member to the list.
+			facultyMembers.add(newMember);
+		}
+
+		PrintTheFaculty(facultyMembers);
+	}
+
+	/**
+	* Prints the passed faculty members.
+	**/
+	private static void PrintTheFaculty(ArrayList<Faculty> facultyMembers)
+	{
+		System.out.printf("ID\t\tName\t\tDepartment ID\tSalary\n");
+
+		// Iterate over the faculty members and print their field values.
+		for(Faculty member : facultyMembers)
+		{
+			System.out.printf("%s\t\t%s\t\t%s\t\t%s\n", 
+				member.id,
+				member.name,
+				member.deptId,
+				member.salary
+			);
+		}
+
+		System.out.printf("\n");
 	}
 
 	/**
