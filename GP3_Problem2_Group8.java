@@ -86,7 +86,7 @@ public class GP3_Problem2_Group8
 
 		// SQL statement for submitting the new faculty member.
 		Statement stmt = conn.createStatement();
-		String sql = String.format("EXEC FACULTY_INSERT_OPTION_ONE('%s', %s, %s);",
+		String sql = String.format("BEGIN FACULTY_INSERT_OPTION_ONE('%s', %s, %s); END;",
 			newMember.name,
 			newMember.id,
 			newMember.deptId
@@ -115,7 +115,7 @@ public class GP3_Problem2_Group8
 
 		// SQL statment to submit the new faculty member.
 		Statement stmt = conn.createStatement();
-		String sql = String.format("EXEC FACULTY_INSERT_OPTION_TWO(%s, '%s', %s, %s);",
+		String sql = String.format("BEGIN FACULTY_INSERT_OPTION_TWO(%s, '%s', %s, %s); END;",
 			newMember.id,
 			newMember.name,
 			newMember.deptId,
