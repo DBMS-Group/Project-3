@@ -1,2 +1,3 @@
 # Project-3
-A collection of items that perform tasks designed to meet specified requirements.
+Third group project for Database Management Systems class.
+- The goal is to gain practice using database drivers and writing PL/SQL.
