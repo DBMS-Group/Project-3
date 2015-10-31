@@ -89,8 +89,7 @@ public class GP3_Problem2_Group8
 		String sql = String.format("BEGIN FACULTY_INSERT_OPTION_ONE('%s', %s, %s); END;",
 			newMember.name,
 			newMember.id,
-			newMember.deptId
-		);
+			newMember.deptId);
 
 		// Executing the SQL statement.
 		stmt.executeQuery(sql);
@@ -119,8 +118,7 @@ public class GP3_Problem2_Group8
 			newMember.id,
 			newMember.name,
 			newMember.deptId,
-			department
-		);
+			department);
 
 		// Executing the SQL statement.
 		stmt.executeQuery(sql);
